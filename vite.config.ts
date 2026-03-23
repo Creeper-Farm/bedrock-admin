@@ -2,6 +2,7 @@ import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import {AntDesignVueResolver} from 'unplugin-vue-components/resolvers'
+import {fileURLToPath, URL} from 'node:url'
 
 export default defineConfig({
     plugins: [
@@ -17,6 +18,11 @@ export default defineConfig({
     server: {
         host: '0.0.0.0', // 监听所有地址，包括局域网 IP
         port: 5173,      // 指定固定端口
-        open: true       // 运行命令后自动在浏览器打开页面
+        open: false       // 运行命令后自动在浏览器打开页面
+    },
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url))
+        }
     }
 })
